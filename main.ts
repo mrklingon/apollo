@@ -35,11 +35,14 @@ function Genesis () {
         cosmos.push(0)
     }
     for (let index = 0; index < 180; index++) {
-        setXY(randint(0, 29), randint(0, 29), randint(1, 9))
+        setXY(randint(0, 29), randint(0, 26), randint(1, 9))
     }
     for (let index = 0; index <= 29; index++) {
         setXY(index, 29, 9)
     }
+    setXY(10, 26, 9)
+    setXY(10, 27, 9)
+    setXY(10, 28, 9)
 }
 let cosmos: number[] = []
 let sy = 0
