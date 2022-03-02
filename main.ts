@@ -1,3 +1,8 @@
+function setship (x: number, y: number, stages: number) {
+    for (let index = 0; index <= stages - 1; index++) {
+        setXY(x, y + index, 9)
+    }
+}
 function showPane (x: number, y: number) {
     for (let ly = 0; ly <= 4; ly++) {
         for (let lx = 0; lx <= 4; lx++) {
@@ -14,6 +19,11 @@ input.onButtonPressed(Button.A, function () {
         showPane(sx, sy)
     }
 })
+function clrship (x: number, y: number, stages: number) {
+    for (let index = 0; index <= stages - 1; index++) {
+        setXY(x, y + index, 0)
+    }
+}
 input.onButtonPressed(Button.B, function () {
     if (state == start) {
         sx += 1
@@ -40,9 +50,7 @@ function Genesis () {
     for (let index = 0; index <= 29; index++) {
         setXY(index, 29, 9)
     }
-    setXY(10, 26, 9)
-    setXY(10, 27, 9)
-    setXY(10, 28, 9)
+    setship(15, 26, 3)
 }
 let cosmos: number[] = []
 let sy = 0
