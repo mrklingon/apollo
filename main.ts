@@ -50,8 +50,12 @@ function Genesis () {
     for (let index = 0; index <= 29; index++) {
         setXY(index, 29, 9)
     }
-    setship(15, 26, 3)
+    ax = 15
+    ay = 26
+    setship(ax, ay, 3)
 }
+let ay = 0
+let ax = 0
 let cosmos: number[] = []
 let sy = 0
 let sx = 0
