@@ -24,6 +24,14 @@ function clrship (x: number, y: number, stages: number) {
         setXY(x, y + index, 0)
     }
 }
+input.onButtonPressed(Button.AB, function () {
+    if (state == start) {
+        state = launch
+        ax = 12
+        ay = 25
+        showPane(ax, ay)
+    }
+})
 input.onButtonPressed(Button.B, function () {
     if (state == start) {
         sx += 1
@@ -54,16 +62,18 @@ function Genesis () {
     ay = 26
     setship(ax, ay, 3)
 }
+let cosmos: number[] = []
 let ay = 0
 let ax = 0
-let cosmos: number[] = []
 let sy = 0
 let sx = 0
 let state = 0
+let launch = 0
 let start = 0
 let diam = 0
 diam = 30
 start = 0
+launch = 1
 state = start
 Genesis()
 for (let index = 0; index <= 25; index++) {
