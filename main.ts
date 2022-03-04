@@ -1,6 +1,9 @@
-function setship (x: number, y: number, stages: number) {
-    for (let index = 0; index <= stages - 1; index++) {
-        setXY(x, y + index, 9)
+function setship (shp: any[]) {
+    ax = shp[0]
+    ay = shp[1]
+    stgs = shp[2]
+    for (let index = 0; index <= stgs - 1; index++) {
+        setXY(ax, ay + index, 9)
     }
 }
 function showPane (x: number, y: number) {
@@ -19,9 +22,12 @@ input.onButtonPressed(Button.A, function () {
         showPane(sx, sy)
     }
 })
-function clrship (x: number, y: number, stages: number) {
-    for (let index = 0; index <= stages - 1; index++) {
-        setXY(x, y + index, 0)
+function clrship (shp: any[]) {
+    ax = shp[0]
+    ay = shp[1]
+    stgs = shp[2]
+    for (let index = 0; index <= stgs - 1; index++) {
+        setXY(ax, ay + index, 0)
     }
 }
 input.onButtonPressed(Button.AB, function () {
@@ -30,6 +36,16 @@ input.onButtonPressed(Button.AB, function () {
         ax = 12
         ay = 25
         showPane(ax, ay)
+        for (let index = 0; index < 2; index++) {
+            ship = mvShip(ship, 0, -1)
+            basic.pause(500)
+            ship[2] = ship[2] - 1
+        }
+        for (let index = 0; index < 6; index++) {
+            ship = mvShip(ship, 0, -1)
+            basic.pause(100)
+        }
+        state = launch
     }
 })
 input.onButtonPressed(Button.B, function () {
@@ -58,13 +74,22 @@ function Genesis () {
     for (let index = 0; index <= 29; index++) {
         setXY(index, 29, 9)
     }
-    ax = 15
-    ay = 26
-    setship(ax, ay, 3)
+    ship = [15, 26, 3]
+    setship(ship)
+}
+function mvShip (veh: any[], xd: number, yd: number) {
+    clrship(veh)
+    veh[0] = xd + veh[0]
+    veh[1] = yd + veh[1]
+    setship(veh)
+    showPane(veh[0] - 3, veh[1] - 1)
+    return veh
 }
 let cosmos: number[] = []
-let ay = 0
-let ax = 0
+let ship: number[] = []
+let stgs: any = null
+let ay: any = null
+let ax: any = null
 let sy = 0
 let sx = 0
 let state = 0
@@ -75,6 +100,7 @@ diam = 30
 start = 0
 launch = 1
 state = start
+let nav = 2
 Genesis()
 for (let index = 0; index <= 25; index++) {
     showPane(index, 25)
