@@ -21,6 +21,9 @@ input.onButtonPressed(Button.A, function () {
         }
         showPane(sx, sy)
     }
+    if (state == orbit) {
+        speed = -2
+    }
 })
 function clrship (shp: any[]) {
     ax = shp[0]
@@ -29,6 +32,15 @@ function clrship (shp: any[]) {
     for (let index = 0; index <= stgs - 1; index++) {
         setXY(ax, ay + index, 0)
     }
+}
+function guard (val: number) {
+    if (val < 0) {
+        val = 0
+    }
+    if (val >= diam) {
+        val = 0
+    }
+    return val
 }
 input.onButtonPressed(Button.AB, function () {
     if (state == start) {
@@ -45,7 +57,7 @@ input.onButtonPressed(Button.AB, function () {
             ship = mvShip(ship, 0, -1)
             basic.pause(100)
         }
-        state = launch
+        state = orbit
     }
 })
 input.onButtonPressed(Button.B, function () {
@@ -55,6 +67,9 @@ input.onButtonPressed(Button.B, function () {
             sx = 0
         }
         showPane(sx, sy)
+    }
+    if (state == orbit) {
+        speed = 2
     }
 })
 function setXY (x: number, y: number, val: number) {
@@ -79,19 +94,22 @@ function Genesis () {
 }
 function mvShip (veh: any[], xd: number, yd: number) {
     clrship(veh)
-    veh[0] = xd + veh[0]
-    veh[1] = yd + veh[1]
+    veh[0] = guard(xd + veh[0])
+    veh[1] = guard(yd + veh[1])
     setship(veh)
     showPane(veh[0] - 3, veh[1] - 1)
     return veh
 }
 let cosmos: number[] = []
-let ship: number[] = []
+let ship: any[] = []
+let val = 0
 let stgs: any = null
 let ay: any = null
 let ax: any = null
 let sy = 0
 let sx = 0
+let speed = 0
+let orbit = 0
 let state = 0
 let launch = 0
 let start = 0
@@ -101,6 +119,8 @@ start = 0
 launch = 1
 state = start
 let nav = 2
+orbit = 3
+speed = 1
 Genesis()
 for (let index = 0; index <= 25; index++) {
     showPane(index, 25)
@@ -110,3 +130,9 @@ basic.pause(500)
 showPane(0, 25)
 sx = 0
 sy = 25
+basic.forever(function () {
+    if (orbit == state) {
+        ship = mvShip(ship, speed, 0)
+        basic.pause(100)
+    }
+})
