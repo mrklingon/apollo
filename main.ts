@@ -23,6 +23,7 @@ input.onButtonPressed(Button.A, function () {
     }
     if (state == orbit) {
         speed = -1
+        ship = mvShip(ship, 0, 1)
     }
 })
 function clrship (shp: any[]) {
@@ -70,6 +71,7 @@ input.onButtonPressed(Button.B, function () {
     }
     if (state == orbit) {
         speed = 1
+        ship = mvShip(ship, 0, -1)
     }
 })
 function setXY (x: number, y: number, val: number) {
@@ -101,8 +103,8 @@ function mvShip (veh: any[], xd: number, yd: number) {
     return veh
 }
 let cosmos: number[] = []
-let ship: any[] = []
 let val = 0
+let ship: any[] = []
 let stgs: any = null
 let ay: any = null
 let ax: any = null
