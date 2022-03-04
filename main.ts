@@ -22,7 +22,7 @@ input.onButtonPressed(Button.A, function () {
         showPane(sx, sy)
     }
     if (state == orbit) {
-        speed = -2
+        speed = -1
     }
 })
 function clrship (shp: any[]) {
@@ -35,7 +35,7 @@ function clrship (shp: any[]) {
 }
 function guard (val: number) {
     if (val < 0) {
-        val = 0
+        val = diam - 1
     }
     if (val >= diam) {
         val = 0
@@ -69,7 +69,7 @@ input.onButtonPressed(Button.B, function () {
         showPane(sx, sy)
     }
     if (state == orbit) {
-        speed = 2
+        speed = 1
     }
 })
 function setXY (x: number, y: number, val: number) {
