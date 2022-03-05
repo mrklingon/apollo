@@ -44,6 +44,23 @@ function guard (val: number) {
     return val
 }
 input.onButtonPressed(Button.AB, function () {
+    if (state == orbit) {
+        state = nav
+        for (let index = 0; index < 4; index++) {
+            basic.showIcon(IconNames.Chessboard)
+            basic.pause(200)
+            basic.showLeds(`
+                # . . . #
+                . . . . .
+                . . # . .
+                . . . . .
+                # . . . #
+                `)
+            basic.pause(200)
+        }
+        mkStars()
+        state = orbit
+    }
     if (state == start) {
         state = launch
         ax = 12
@@ -57,6 +74,11 @@ input.onButtonPressed(Button.AB, function () {
         for (let index = 0; index < 6; index++) {
             ship = mvShip(ship, 0, -1)
             basic.pause(100)
+        }
+        for (let index = 0; index <= 29; index++) {
+            if (6 < randint(0, 10)) {
+                setXY(index, 29, randint(0, 5))
+            }
         }
         state = orbit
     }
@@ -74,6 +96,11 @@ input.onButtonPressed(Button.B, function () {
         ship = mvShip(ship, 0, -1)
     }
 })
+function mkStars () {
+    for (let index = 0; index < 180; index++) {
+        setXY(randint(0, diam - 1), randint(0, diam - 4), randint(1, 9))
+    }
+}
 function setXY (x: number, y: number, val: number) {
     cosmos[y * diam + x] = val
 }
@@ -85,9 +112,7 @@ function Genesis () {
     for (let index = 0; index < diam * diam; index++) {
         cosmos.push(0)
     }
-    for (let index = 0; index < 180; index++) {
-        setXY(randint(0, 29), randint(0, 26), randint(1, 9))
-    }
+    mkStars()
     for (let index = 0; index <= 29; index++) {
         setXY(index, 29, 9)
     }
@@ -112,15 +137,32 @@ let sy = 0
 let sx = 0
 let speed = 0
 let orbit = 0
+let nav = 0
 let state = 0
 let launch = 0
 let start = 0
 let diam = 0
+for (let index = 0; index < 4; index++) {
+    basic.showLeds(`
+        # . # . #
+        . . # . .
+        # # # # #
+        . . # . .
+        # . # . #
+        `)
+    basic.showLeds(`
+        # . . . #
+        . # . # .
+        . . # . .
+        . # . # .
+        # . . . #
+        `)
+}
 diam = 30
 start = 0
 launch = 1
 state = start
-let nav = 2
+nav = 2
 orbit = 3
 speed = 1
 Genesis()
