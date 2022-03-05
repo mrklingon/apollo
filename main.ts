@@ -76,9 +76,7 @@ input.onButtonPressed(Button.AB, function () {
             basic.pause(100)
         }
         for (let index = 0; index <= 29; index++) {
-            if (6 < randint(0, 10)) {
-                setXY(index, 29, randint(0, 5))
-            }
+            setXY(index, 29, 0)
         }
         state = orbit
     }
